@@ -5,10 +5,16 @@ Welcome to the **People Management** project. This is a mobile application desig
 The program should also work on the iOS system, but this has not been tested.
 
 ## Table of Contents
+- [Database](#database)
 - [Features](#features)
 - [Installation](#installation)
 - [Packages](#packages)
 - [Possible improvements](#possible-improvements)
+
+## Database
+ERD of database:
+
+![plot](./assets/images/erd.png)
 
 ## Features
 
