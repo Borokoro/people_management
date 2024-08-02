@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:people_managment/features/groups/presentation/bloc/groups_bloc.dart';
 import 'package:people_managment/features/people/presentation/bloc/people_bloc.dart';
 import 'package:people_managment/features/post_code/presentation/bloc/post_code_cubit.dart';
-import 'package:people_managment/features/successful_operation_checker/presentation/successful_operation_checker_cubit.dart';
 
 import 'bloc_observer.dart';
 import 'features/bottom_navigation/bloc/bottom_navigation_cubit.dart';
@@ -30,7 +29,6 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => locator<BottomNavigationCubit>()),
         BlocProvider(create: (_) => locator<PostCodeCubit>()),
-        BlocProvider(create: (_) => locator<SuccessfulOperationCheckerCubit>()),
         BlocProvider(create: (_) => locator<PeopleBloc>()),
         BlocProvider(create: (_) => locator<GroupsBloc>()),
       ],

@@ -6,7 +6,6 @@ import 'package:people_managment/features/groups/data/models/groups_model.dart';
 import 'package:people_managment/features/groups/domain/usecases/delete_group_usecase.dart';
 
 import '../../../../core/error/failures.dart';
-import '../../../successful_operation_checker/presentation/successful_operation_checker_cubit.dart';
 import '../../domain/usecases/get_groups_usecase.dart';
 import '../../domain/usecases/insert_group_usecase.dart';
 import '../../domain/usecases/update_group_usecase.dart';
@@ -34,10 +33,7 @@ class GroupsBloc extends Bloc<GroupsEvent, GroupsState> {
 
   _onDeleteGroupEvent(DeleteGroupEvent event, Emitter<GroupsState> emit) async{
     final Either<Failure, void> result= await deleteGroupUseCase.call(event.id);
-    result.fold((l){
-      event.context.read<SuccessfulOperationCheckerCubit>().operationUnSuccessful();
-    }, (r){
-      event.context.read<SuccessfulOperationCheckerCubit>().operationSuccessful();
+    result.fold((l){}, (r){
       event.context.read<GroupsBloc>().add(const GetGroupsEvent());
     });
   }
@@ -53,20 +49,14 @@ class GroupsBloc extends Bloc<GroupsEvent, GroupsState> {
 
   _onInsertGroupEvent(InsertGroupEvent event, Emitter<GroupsState> emit) async{
     final Either<Failure, void> result= await insertGroupUseCase.call(event.group);
-    result.fold((l){
-      event.context.read<SuccessfulOperationCheckerCubit>().operationUnSuccessful();
-    }, (r){
-      event.context.read<SuccessfulOperationCheckerCubit>().operationSuccessful();
+    result.fold((l){}, (r){
       event.context.read<GroupsBloc>().add(const GetGroupsEvent());
     });
   }
 
   _onUpdateGroupEvent(UpdateGroupEvent event, Emitter<GroupsState> emit) async{
     final Either<Failure, void> result= await updateGroupUseCase.call(event.group);
-    result.fold((l){
-      event.context.read<SuccessfulOperationCheckerCubit>().operationUnSuccessful();
-    }, (r){
-      event.context.read<SuccessfulOperationCheckerCubit>().operationSuccessful();
+    result.fold((l){}, (r){
       event.context.read<GroupsBloc>().add(const GetGroupsEvent());
     });
   }

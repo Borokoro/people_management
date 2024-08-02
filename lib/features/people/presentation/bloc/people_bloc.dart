@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:people_managment/core/error/failures.dart';
 import 'package:people_managment/features/people/domain/usecases/insert_person_usecase.dart';
-import 'package:people_managment/features/successful_operation_checker/presentation/successful_operation_checker_cubit.dart';
 
 import '../../data/models/people_model.dart';
 import '../../domain/usecases/delete_person_usecase.dart';
@@ -33,10 +32,7 @@ class PeopleBloc extends Bloc<PeopleEvent, PeopleState> {
 
   _onDeletePersonEvent(DeletePersonEvent event, Emitter<PeopleState> emit) async{
     final Either<Failure, void> result= await deletePersonUseCase.call(event.id);
-    result.fold((l){
-      event.context.read<SuccessfulOperationCheckerCubit>().operationUnSuccessful();
-    }, (r){
-      event.context.read<SuccessfulOperationCheckerCubit>().operationSuccessful();
+    result.fold((l){}, (r){
       event.context.read<PeopleBloc>().add(const GetPeopleEvent());
     });
   }
@@ -52,20 +48,14 @@ class PeopleBloc extends Bloc<PeopleEvent, PeopleState> {
 
   _onInsertPersonEvent(InsertPersonEvent event, Emitter<PeopleState> emit) async{
     final Either<Failure, void> result= await insertPersonUseCase.call(event.person);
-    result.fold((l){
-      event.context.read<SuccessfulOperationCheckerCubit>().operationUnSuccessful();
-    }, (r){
-      event.context.read<SuccessfulOperationCheckerCubit>().operationSuccessful();
+    result.fold((l){}, (r){
       event.context.read<PeopleBloc>().add(const GetPeopleEvent());
     });
   }
 
   _onUpdatePersonEvent(UpdatePersonEvent event, Emitter<PeopleState> emit) async{
     final Either<Failure, void> result= await updatePersonUseCase.call(event.person);
-    result.fold((l){
-      event.context.read<SuccessfulOperationCheckerCubit>().operationUnSuccessful();
-    }, (r){
-      event.context.read<SuccessfulOperationCheckerCubit>().operationSuccessful();
+    result.fold((l){}, (r){
       event.context.read<PeopleBloc>().add(const GetPeopleEvent());
     });
   }

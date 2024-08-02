@@ -9,7 +9,6 @@ import 'package:people_managment/features/post_code/data/repositories/post_code_
 import 'package:people_managment/features/post_code/domain/repositories/post_code_repository.dart';
 import 'package:people_managment/features/post_code/domain/usecases/get_post_code_data_usecase.dart';
 import 'package:people_managment/features/post_code/presentation/bloc/post_code_cubit.dart';
-import 'package:people_managment/features/successful_operation_checker/presentation/successful_operation_checker_cubit.dart';
 import 'package:requests_inspector/requests_inspector.dart';
 
 import 'features/bottom_navigation/bloc/bottom_navigation_cubit.dart';
@@ -32,7 +31,6 @@ void setupLocator(){
 
   //cubit
   locator.registerFactory(() => BottomNavigationCubit());
-  locator.registerFactory(() => SuccessfulOperationCheckerCubit());
   locator.registerFactory(() => PostCodeCubit(getPostCodeDataUseCase: locator()));
 
   //bloc
