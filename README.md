@@ -62,7 +62,8 @@ Similarly you can delete group by pressing trash icon.
 Editing for groups works in the same manner as editing for person.
 
 ### Completing data using a postal code
-**Important**
+
+#### Important
 This function only works when adding a person and does not work for updating a person. 
 After entering a postal code (whether correct or not) and confirming by pressing the Submit button on the keyboard,
 the program will attempt to retrieve all possible data from the API. The program will then fill in fields with data from API.
