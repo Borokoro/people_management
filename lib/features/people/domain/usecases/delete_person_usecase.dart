@@ -3,12 +3,12 @@ import 'package:people_managment/features/people/domain/repositories/people_repo
 
 import '../../../../core/error/failures.dart';
 
-class DeletePersonUseCase{
+class DeletePersonUseCase {
   final PeopleRepository peopleRepository;
 
   const DeletePersonUseCase({required this.peopleRepository});
 
-  Future<Either<Failure, void>> call(int id){
+  Future<Either<Failure, void>> call(int id) {
     return peopleRepository.deletePerson(id);
   }
 }

@@ -5,47 +5,47 @@ import 'package:people_managment/features/people/domain/repositories/people_repo
 import '../../../../core/error/failures.dart';
 import '../models/people_model.dart';
 
-class PeopleRepositoryImpl implements PeopleRepository{
+class PeopleRepositoryImpl implements PeopleRepository {
   final LocalPeopleDataSource localPeopleDataSource;
 
   PeopleRepositoryImpl({required this.localPeopleDataSource});
 
   @override
-  Future<Either<Failure, void>> insertPerson(PeopleModel person) async{
-    try{
-      final result=await localPeopleDataSource.insertPerson(person);
+  Future<Either<Failure, void>> insertPerson(PeopleModel person) async {
+    try {
+      final result = await localPeopleDataSource.insertPerson(person);
       return Right(result);
-    } on Exception{
+    } on Exception {
       return const Left(DatabaseFailure("Failed to insert person"));
     }
   }
 
   @override
-  Future<Either<Failure, void>> updatePerson(PeopleModel person) async{
-    try{
-      final result=await localPeopleDataSource.updatePerson(person);
+  Future<Either<Failure, void>> updatePerson(PeopleModel person) async {
+    try {
+      final result = await localPeopleDataSource.updatePerson(person);
       return Right(result);
-    } on Exception{
+    } on Exception {
       return const Left(DatabaseFailure("Failed to update person"));
     }
   }
 
   @override
-  Future<Either<Failure, void>> deletePerson(int id) async{
-    try{
-      final result=await localPeopleDataSource.deletePerson(id);
+  Future<Either<Failure, void>> deletePerson(int id) async {
+    try {
+      final result = await localPeopleDataSource.deletePerson(id);
       return Right(result);
-    } on Exception{
+    } on Exception {
       return const Left(DatabaseFailure("Failed to delete person"));
     }
   }
 
   @override
-  Future<Either<Failure, List<PeopleModel>>> getPeople() async{
-    try{
-      final result=await localPeopleDataSource.getPeople();
+  Future<Either<Failure, List<PeopleModel>>> getPeople() async {
+    try {
+      final result = await localPeopleDataSource.getPeople();
       return Right(result);
-    } on Exception{
+    } on Exception {
       return const Left(DatabaseFailure("Failed to get people"));
     }
   }

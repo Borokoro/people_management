@@ -13,8 +13,17 @@ class PeopleScreen extends StatefulWidget {
 }
 
 class _PeopleScreenState extends State<PeopleScreen> {
-  List<bool> isPanelExpanded=[];
-  final List<String> cellNames=['birthDate', 'city', 'county', 'name', 'postCode', 'street', 'surname', 'voivodeship'];
+  List<bool> isPanelExpanded = [];
+  final List<String> cellNames = [
+    'birthDate',
+    'city',
+    'county',
+    'name',
+    'postCode',
+    'street',
+    'surname',
+    'voivodeship'
+  ];
   bool isAddPersonExpanded = false;
   List<int> chosen = [];
   List<TextEditingController> textControllers =
@@ -22,21 +31,21 @@ class _PeopleScreenState extends State<PeopleScreen> {
 
   @override
   void initState() {
-      context.read<GroupsBloc>().add(const GetGroupsEvent());
-      context.read<PeopleBloc>().add(const GetPeopleEvent());
+    context.read<GroupsBloc>().add(const GetGroupsEvent());
+    context.read<PeopleBloc>().add(const GetPeopleEvent());
     super.initState();
   }
 
   void expandOrHidePersonInfo(int id, List<dynamic> personGroups) {
     for (int i = 0; i < isPanelExpanded.length; i++) {
-      if(id!=i) {
+      if (id != i) {
         isPanelExpanded[i] = false;
       }
     }
     isAddPersonExpanded = false;
     setState(() {
-      chosen=[];
-      for(int i=0;i<personGroups.length;i++){
+      chosen = [];
+      for (int i = 0; i < personGroups.length; i++) {
         chosen.add(personGroups[i]);
       }
       isPanelExpanded[id] = !isPanelExpanded[id];
@@ -44,14 +53,13 @@ class _PeopleScreenState extends State<PeopleScreen> {
   }
 
   void checkBoxValueChanged(int id, bool isAdding) {
-    if(isAdding) {
+    if (isAdding) {
       setState(() {
-      chosen.add(id);
-    });
-    }
-    else{
+        chosen.add(id);
+      });
+    } else {
       setState(() {
-        chosen.removeWhere((item) => item==id);
+        chosen.removeWhere((item) => item == id);
       });
     }
   }
@@ -61,19 +69,19 @@ class _PeopleScreenState extends State<PeopleScreen> {
       isPanelExpanded[i] = false;
     }
     for (int i = 0; i < textControllers.length; i++) {
-      textControllers[i].text='';
+      textControllers[i].text = '';
     }
     setState(() {
-      chosen=[];
+      chosen = [];
       isAddPersonExpanded = !isAddPersonExpanded;
     });
   }
 
-  void resetPanel(){
+  void resetPanel() {
     isAddPersonExpanded = !isAddPersonExpanded;
-    isPanelExpanded=[];
+    isPanelExpanded = [];
     for (int i = 0; i < textControllers.length; i++) {
-      textControllers[i].text='';
+      textControllers[i].text = '';
     }
   }
 
@@ -90,7 +98,7 @@ class _PeopleScreenState extends State<PeopleScreen> {
           child: Text(state.message),
         );
       }
-      if(isPanelExpanded.isEmpty) {
+      if (isPanelExpanded.isEmpty) {
         isPanelExpanded = List.generate(state.data.length, (index) => false);
       }
       return Padding(
@@ -99,11 +107,25 @@ class _PeopleScreenState extends State<PeopleScreen> {
           itemCount: state.data.length + 1,
           itemBuilder: (context, index) {
             if (index == state.data.length) {
-              return containerAddPerson(context, isAddPersonExpanded,
-                  expandOrHideAddPerson, textControllers, cellNames, resetPanel, checkBoxValueChanged, chosen);
+              return containerAddPerson(
+                  context,
+                  isAddPersonExpanded,
+                  expandOrHideAddPerson,
+                  textControllers,
+                  cellNames,
+                  resetPanel,
+                  checkBoxValueChanged,
+                  chosen);
             } else {
-              return containerViewPerson(context, textControllers,
-                  isPanelExpanded[index], expandOrHidePersonInfo, index, cellNames, checkBoxValueChanged, chosen);
+              return containerViewPerson(
+                  context,
+                  textControllers,
+                  isPanelExpanded[index],
+                  expandOrHidePersonInfo,
+                  index,
+                  cellNames,
+                  checkBoxValueChanged,
+                  chosen);
             }
           },
           separatorBuilder: (BuildContext context, int index) => const SizedBox(

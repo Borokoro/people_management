@@ -5,19 +5,20 @@ import 'package:people_managment/features/post_code/data/datasources/remote_post
 import 'package:people_managment/features/post_code/data/models/post_code_data_model.dart';
 import 'package:people_managment/features/post_code/domain/repositories/post_code_repository.dart';
 
-class PostCodeRepositoryImpl extends PostCodeRepository{
+class PostCodeRepositoryImpl extends PostCodeRepository {
   final RemotePostCodeDataSource remotePostCodeDataSource;
 
   PostCodeRepositoryImpl({required this.remotePostCodeDataSource});
 
   @override
-  Future<Either<Failure, PostCodeDataModel>> getPostCodeData(String postCode) async{
-    try{
-      final result=await remotePostCodeDataSource.fetchPostCodeData(postCode);
+  Future<Either<Failure, PostCodeDataModel>> getPostCodeData(
+      String postCode) async {
+    try {
+      final result = await remotePostCodeDataSource.fetchPostCodeData(postCode);
       return Right(result);
-    } on ApiException{
+    } on ApiException {
       return const Left(ApiFailure("Failed to fetch data"));
-    } on Exception{
+    } on Exception {
       return const Left(ApiFailure("Failed to fetch data"));
     }
   }

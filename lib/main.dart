@@ -10,7 +10,6 @@ import 'features/bottom_navigation/bloc/bottom_navigation_cubit.dart';
 import 'features/skeleton/presentation/skeleton.dart';
 import 'injection_container.dart';
 
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupLocator();

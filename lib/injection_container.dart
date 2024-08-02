@@ -25,43 +25,64 @@ import 'features/people/domain/usecases/get_people_usecase.dart';
 import 'features/people/domain/usecases/insert_person_usecase.dart';
 import 'features/people/domain/usecases/update_person_usecase.dart';
 
-final locator=GetIt.instance;
+final locator = GetIt.instance;
 
-void setupLocator(){
-
+void setupLocator() {
   //cubit
   locator.registerFactory(() => BottomNavigationCubit());
-  locator.registerFactory(() => PostCodeCubit(getPostCodeDataUseCase: locator()));
+  locator
+      .registerFactory(() => PostCodeCubit(getPostCodeDataUseCase: locator()));
 
   //bloc
   locator.registerFactory(() => PeopleBloc(
-      getPeopleUseCase: locator(), deletePersonUseCase: locator(), updatePersonUseCase: locator(), insertPersonUseCase: locator()));
+      getPeopleUseCase: locator(),
+      deletePersonUseCase: locator(),
+      updatePersonUseCase: locator(),
+      insertPersonUseCase: locator()));
   locator.registerFactory(() => GroupsBloc(
-      getGroupsUseCase: locator(), deleteGroupUseCase: locator(), updateGroupUseCase: locator(), insertGroupUseCase: locator()));
+      getGroupsUseCase: locator(),
+      deleteGroupUseCase: locator(),
+      updateGroupUseCase: locator(),
+      insertGroupUseCase: locator()));
 
   //use-cases
-  locator.registerLazySingleton(() => DeletePersonUseCase(peopleRepository: locator()));
-  locator.registerLazySingleton(() => GetPeopleUseCase(peopleRepository: locator()));
-  locator.registerLazySingleton(() => InsertPersonUseCase(peopleRepository: locator()));
-  locator.registerLazySingleton(() => UpdatePersonUseCase(peopleRepository: locator()));
+  locator.registerLazySingleton(
+      () => DeletePersonUseCase(peopleRepository: locator()));
+  locator.registerLazySingleton(
+      () => GetPeopleUseCase(peopleRepository: locator()));
+  locator.registerLazySingleton(
+      () => InsertPersonUseCase(peopleRepository: locator()));
+  locator.registerLazySingleton(
+      () => UpdatePersonUseCase(peopleRepository: locator()));
 
-  locator.registerLazySingleton(() => DeleteGroupUseCase(groupsRepository: locator()));
-  locator.registerLazySingleton(() => GetGroupsUseCase(groupsRepository: locator()));
-  locator.registerLazySingleton(() => InsertGroupUseCase(groupsRepository: locator()));
-  locator.registerLazySingleton(() => UpdateGroupUseCase(groupsRepository: locator()));
+  locator.registerLazySingleton(
+      () => DeleteGroupUseCase(groupsRepository: locator()));
+  locator.registerLazySingleton(
+      () => GetGroupsUseCase(groupsRepository: locator()));
+  locator.registerLazySingleton(
+      () => InsertGroupUseCase(groupsRepository: locator()));
+  locator.registerLazySingleton(
+      () => UpdateGroupUseCase(groupsRepository: locator()));
 
-  locator.registerLazySingleton(() => GetPostCodeDataUseCase(postCodeRepository: locator()));
+  locator.registerLazySingleton(
+      () => GetPostCodeDataUseCase(postCodeRepository: locator()));
 
   //repositories
-  locator.registerLazySingleton<PeopleRepository>(() => PeopleRepositoryImpl(localPeopleDataSource: locator()));
-  locator.registerLazySingleton<GroupsRepository>(() => GroupsRepositoryImpl(localGroupsDataSource: locator()));
-  locator.registerLazySingleton<PostCodeRepository>(() => PostCodeRepositoryImpl(remotePostCodeDataSource: locator()));
+  locator.registerLazySingleton<PeopleRepository>(
+      () => PeopleRepositoryImpl(localPeopleDataSource: locator()));
+  locator.registerLazySingleton<GroupsRepository>(
+      () => GroupsRepositoryImpl(localGroupsDataSource: locator()));
+  locator.registerLazySingleton<PostCodeRepository>(
+      () => PostCodeRepositoryImpl(remotePostCodeDataSource: locator()));
 
   //data-sources
-  locator.registerLazySingleton<LocalPeopleDataSource>(() => LocalPeopleDataSourceImpl());
-  locator.registerLazySingleton<LocalGroupsDataSource>(() => LocalGroupsDataSourceImpl());
-  locator.registerLazySingleton<RemotePostCodeDataSource>(() => RemotePostCodeDataSourceImpl(dio: locator()));
+  locator.registerLazySingleton<LocalPeopleDataSource>(
+      () => LocalPeopleDataSourceImpl());
+  locator.registerLazySingleton<LocalGroupsDataSource>(
+      () => LocalGroupsDataSourceImpl());
+  locator.registerLazySingleton<RemotePostCodeDataSource>(
+      () => RemotePostCodeDataSourceImpl(dio: locator()));
   //clients
   locator.registerLazySingleton(
-          () => Dio()..interceptors.add(RequestsInspectorInterceptor()));
+      () => Dio()..interceptors.add(RequestsInspectorInterceptor()));
 }

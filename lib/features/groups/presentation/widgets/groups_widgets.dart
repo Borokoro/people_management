@@ -112,35 +112,37 @@ addGroupList(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                  Text(
-                    '$cellName:',
-                    style: const TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  Container(
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                    ),
-                    width: 150,
-                    child: TextFormField(
-                      controller: controller,
-                      decoration: const InputDecoration.collapsed(
-                        hintText: 'Write here!',
-                        hintStyle: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.w400,
+                      Text(
+                        '$cellName:',
+                        style: const TextStyle(
                           fontSize: 20,
-                          color: Color(0xffb1b1b1),
                         ),
                       ),
-                    ),
-                  ),
-                ]),
-                SizedBox(height: 10,),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Container(
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                        ),
+                        width: 150,
+                        child: TextFormField(
+                          controller: controller,
+                          decoration: const InputDecoration.collapsed(
+                            hintText: 'Write here!',
+                            hintStyle: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w400,
+                              fontSize: 20,
+                              color: Color(0xffb1b1b1),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ]),
+                const SizedBox(
+                  height: 10,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -159,15 +161,20 @@ addGroupList(
                             ),
                           )
                         : SizedBox(
-                      width: 200,
-                          child: Column(
+                            width: 200,
+                            child: Column(
                               children: [
                                 for (int i = 0;
-                                    i < context.read<PeopleBloc>().state.data.length;
+                                    i <
+                                        context
+                                            .read<PeopleBloc>()
+                                            .state
+                                            .data
+                                            .length;
                                     i++)
                                   Row(
                                     mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       SizedBox(
                                         width: 150,
@@ -208,10 +215,12 @@ addGroupList(
                                   ),
                               ],
                             ),
-                        ),
+                          ),
                   ],
                 ),
-                SizedBox(height: 10,),
+                const SizedBox(
+                  height: 10,
+                ),
               ],
             ),
           ),
@@ -252,8 +261,13 @@ addToDatabaseButton(BuildContext context, TextEditingController controller,
   );
 }
 
-containerViewGroup(BuildContext context, TextEditingController controller,
-    bool isExpanded, Function callBackViewGroup, int id, String cellName,
+containerViewGroup(
+    BuildContext context,
+    TextEditingController controller,
+    bool isExpanded,
+    Function callBackViewGroup,
+    int id,
+    String cellName,
     Function callBackChangeCheckBoxValue,
     List<int> chosen) {
   return ClipRect(
@@ -275,7 +289,8 @@ containerViewGroup(BuildContext context, TextEditingController controller,
             rowForContainerViewGroup(
                 isExpanded, callBackViewGroup, context, controller, id),
             isExpanded
-                ? viewGroupList(cellName, controller, context, id, chosen, callBackChangeCheckBoxValue)
+                ? viewGroupList(cellName, controller, context, id, chosen,
+                    callBackChangeCheckBoxValue)
                 : const SizedBox(),
           ],
         ),
@@ -347,8 +362,12 @@ deleteGroupButton(BuildContext context, int id) {
   );
 }
 
-viewGroupList(String cellName, TextEditingController controller,
-    BuildContext context, int id, List<int> chosen,
+viewGroupList(
+    String cellName,
+    TextEditingController controller,
+    BuildContext context,
+    int id,
+    List<int> chosen,
     Function callBackChangeCheckBoxValue) {
   return Container(
     height: 250,
@@ -398,7 +417,9 @@ viewGroupList(String cellName, TextEditingController controller,
                         ),
                       ),
                     ]),
-                SizedBox(height: 10,),
+                const SizedBox(
+                  height: 10,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -417,8 +438,8 @@ viewGroupList(String cellName, TextEditingController controller,
                             ),
                           )
                         : SizedBox(
-                      width: 200,
-                          child: Column(
+                            width: 200,
+                            child: Column(
                               children: [
                                 for (int i = 0;
                                     i <
@@ -430,7 +451,7 @@ viewGroupList(String cellName, TextEditingController controller,
                                     i++)
                                   Row(
                                     mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       SizedBox(
                                         width: 150,
@@ -471,13 +492,15 @@ viewGroupList(String cellName, TextEditingController controller,
                                   ),
                               ],
                             ),
-                        ),
+                          ),
                   ],
                 ),
               ],
             ),
           ),
-          SizedBox(width: 10,),
+          const SizedBox(
+            width: 10,
+          ),
           buttonUpdate(context, controller, id, chosen),
         ],
       ),
@@ -485,16 +508,19 @@ viewGroupList(String cellName, TextEditingController controller,
   );
 }
 
-buttonUpdate(BuildContext context, TextEditingController controller, int id, List<int> chosen) {
+buttonUpdate(BuildContext context, TextEditingController controller, int id,
+    List<int> chosen) {
   return ElevatedButton(
     onPressed: () {
-      GroupsModel group = GroupsModel(
-          name: controller.text,
-          people: chosen,
-          id: context.read<GroupsBloc>().state.data[id].id);
-      context
-          .read<GroupsBloc>()
-          .add(UpdateGroupEvent(group: group, context: context));
+      if (controller.text != '') {
+        GroupsModel group = GroupsModel(
+            name: controller.text,
+            people: chosen,
+            id: context.read<GroupsBloc>().state.data[id].id);
+        context
+            .read<GroupsBloc>()
+            .add(UpdateGroupEvent(group: group, context: context));
+      }
     },
     style: ElevatedButton.styleFrom(
       backgroundColor: Colors.lightGreen,

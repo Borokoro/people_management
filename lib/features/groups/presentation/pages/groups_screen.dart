@@ -13,12 +13,11 @@ class GroupsScreen extends StatefulWidget {
 }
 
 class _GroupsScreenState extends State<GroupsScreen> {
-  List<bool> isPanelExpanded=[];
-  final String cellName='name';
+  List<bool> isPanelExpanded = [];
+  final String cellName = 'name';
   bool isAddGroupExpanded = false;
-  TextEditingController textController=TextEditingController();
+  TextEditingController textController = TextEditingController();
   List<int> chosen = [];
-
 
   @override
   void initState() {
@@ -29,15 +28,15 @@ class _GroupsScreenState extends State<GroupsScreen> {
 
   void expandOrHideGroupInfo(int id, List<dynamic> groupsPeople) {
     for (int i = 0; i < isPanelExpanded.length; i++) {
-      if(id!=i) {
+      if (id != i) {
         isPanelExpanded[i] = false;
       }
     }
-    textController.text='';
+    textController.text = '';
     isAddGroupExpanded = false;
     setState(() {
-      chosen=[];
-      for(int i=0;i<groupsPeople.length;i++){
+      chosen = [];
+      for (int i = 0; i < groupsPeople.length; i++) {
         chosen.add(groupsPeople[i]);
       }
       isPanelExpanded[id] = !isPanelExpanded[id];
@@ -45,14 +44,13 @@ class _GroupsScreenState extends State<GroupsScreen> {
   }
 
   void checkBoxValueChanged(int id, bool isAdding) {
-    if(isAdding) {
+    if (isAdding) {
       setState(() {
         chosen.add(id);
       });
-    }
-    else{
+    } else {
       setState(() {
-        chosen.removeWhere((item) => item==id);
+        chosen.removeWhere((item) => item == id);
       });
     }
   }
@@ -61,17 +59,17 @@ class _GroupsScreenState extends State<GroupsScreen> {
     for (int i = 0; i < isPanelExpanded.length; i++) {
       isPanelExpanded[i] = false;
     }
-    textController.text='';
+    textController.text = '';
     setState(() {
-      chosen=[];
+      chosen = [];
       isAddGroupExpanded = !isAddGroupExpanded;
     });
   }
 
-  void resetPanel(){
+  void resetPanel() {
     isAddGroupExpanded = !isAddGroupExpanded;
-    isPanelExpanded=[];
-    textController.text='';
+    isPanelExpanded = [];
+    textController.text = '';
   }
 
   @override
@@ -87,7 +85,7 @@ class _GroupsScreenState extends State<GroupsScreen> {
           child: Text(state.message),
         );
       }
-      if(isPanelExpanded.isEmpty) {
+      if (isPanelExpanded.isEmpty) {
         isPanelExpanded = List.generate(state.data.length, (index) => false);
       }
       return Padding(
@@ -96,11 +94,25 @@ class _GroupsScreenState extends State<GroupsScreen> {
           itemCount: state.data.length + 1,
           itemBuilder: (context, index) {
             if (index == state.data.length) {
-              return containerAddGroup(context, isAddGroupExpanded,
-                  expandOrHideAddGroup, textController, cellName, resetPanel, checkBoxValueChanged, chosen);
+              return containerAddGroup(
+                  context,
+                  isAddGroupExpanded,
+                  expandOrHideAddGroup,
+                  textController,
+                  cellName,
+                  resetPanel,
+                  checkBoxValueChanged,
+                  chosen);
             } else {
-              return containerViewGroup(context, textController,
-                  isPanelExpanded[index], expandOrHideGroupInfo, index, cellName, checkBoxValueChanged, chosen);
+              return containerViewGroup(
+                  context,
+                  textController,
+                  isPanelExpanded[index],
+                  expandOrHideGroupInfo,
+                  index,
+                  cellName,
+                  checkBoxValueChanged,
+                  chosen);
             }
           },
           separatorBuilder: (BuildContext context, int index) => const SizedBox(

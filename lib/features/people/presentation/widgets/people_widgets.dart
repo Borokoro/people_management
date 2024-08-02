@@ -69,8 +69,8 @@ rowForContainerAddPerson(bool isExpanded, Function callBackAddPerson,
 showAddPersonDataPanel(Function callBackAddPerson, bool isExpanded) {
   return IconButton(
     onPressed: () {
-            callBackAddPerson();
-          },
+      callBackAddPerson();
+    },
     icon: Icon(
       isExpanded
           ? const IconData(0xe799, fontFamily: 'MaterialIcons')
@@ -197,177 +197,180 @@ addPersonList(
     Function callBackChangeCheckBoxValue,
     List<int> chosen) {
   return BlocConsumer<PostCodeCubit, PostCodeState>(
-  listener: (context, state) {
-    if(state is PostCodeLoading){
-      showDialog(
-        barrierDismissible: false,
-          context: context,
-          builder: (ctx){
-          return const Center(
-            child: CircularProgressIndicator(
-              strokeWidth: 2,
-            ),
-          );
-          });
-    }
-    if(state is PostCodeLoaded){
-      controllers[1].text=state.postCodeDataModel.city;
-      controllers[2].text=state.postCodeDataModel.county;
-      controllers[4].text=state.postCodeDataModel.postCode;
-      controllers[5].text=state.postCodeDataModel.street;
-      controllers[7].text=state.postCodeDataModel.voivodeship;
-      Navigator.of(context).pop();
-    }
-    if(state is PostCodeError){
-      Navigator.of(context).pop();
-    }
-  },
-  builder: (context, state) {
-    return Container(
-    height: 250,
-    decoration: const BoxDecoration(
-      gradient: LinearGradient(
-        begin: Alignment.centerRight,
-        end: Alignment.centerLeft,
-        colors: [Colors.indigoAccent, Colors.cyanAccent],
-      ),
-    ),
-    child: Padding(
-      padding: const EdgeInsets.all(15.0),
-      child: ListView.separated(
-        shrinkWrap: true,
-        itemBuilder: (context, index) {
-          if (index == cellNames.length) {
-            return Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'groups:',
-                  style: TextStyle(
-                    fontSize: 20,
-                  ),
+    listener: (context, state) {
+      if (state is PostCodeLoading) {
+        showDialog(
+            barrierDismissible: false,
+            context: context,
+            builder: (ctx) {
+              return const Center(
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
                 ),
-                context.read<GroupsBloc>().state.data.isEmpty
-                    ? const Text(
-                        'No groups available',
-                        style: TextStyle(
-                          fontSize: 20,
-                        ),
-                      )
-                    : SizedBox(
-                        width: 150,
-                        child: Column(
-                          children: [
-                            for (int i = 0;
-                                i <
-                                    context
-                                        .read<GroupsBloc>()
-                                        .state
-                                        .data
-                                        .length;
-                                i++)
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  SizedBox(
-                                    width: 100,
-                                    child: Text(
-                                      overflow: TextOverflow.ellipsis,
-                                      context
-                                          .read<GroupsBloc>()
-                                          .state
-                                          .data[i]
-                                          .name,
-                                      style: const TextStyle(
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                  ),
-                                  Checkbox(
-                                      value: chosen.contains(context
-                                          .read<GroupsBloc>()
-                                          .state
-                                          .data[i]
-                                          .id),
-                                      onChanged: (bool? value) {
-                                        if (value!) {
-                                          callBackChangeCheckBoxValue(
-                                              context
-                                                  .read<GroupsBloc>()
-                                                  .state
-                                                  .data[i]
-                                                  .id,
-                                              true);
-                                        } else {
-                                          callBackChangeCheckBoxValue(
-                                              context
-                                                  .read<GroupsBloc>()
-                                                  .state
-                                                  .data[i]
-                                                  .id,
-                                              false);
-                                        }
-                                      }),
-                                ],
-                              ),
-                          ],
-                        ),
-                      ),
-              ],
-            );
-          }
-          if (index == cellNames.length + 1) {
-            return addToDatabaseButton(
-                context, controllers, callBackResetPanel, chosen);
-          }
-          return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  '${cellNames[index]}:',
-                  style: const TextStyle(
-                    fontSize: 20,
-                  ),
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                  ),
-                  width: 150,
-                  child: TextFormField(
-                    onFieldSubmitted: (value) {
-                      if(index==4){
-                        context.read<PostCodeCubit>().getPostCodeData(value);
-                      }
-                    },
-                    controller: controllers[index],
-                    decoration: const InputDecoration.collapsed(
-                      hintText: 'Write here!',
-                      hintStyle: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w400,
+              );
+            });
+      }
+      if (state is PostCodeLoaded) {
+        controllers[1].text = state.postCodeDataModel.city;
+        controllers[2].text = state.postCodeDataModel.county;
+        controllers[4].text = state.postCodeDataModel.postCode;
+        controllers[5].text = state.postCodeDataModel.street;
+        controllers[7].text = state.postCodeDataModel.voivodeship;
+        Navigator.of(context).pop();
+      }
+      if (state is PostCodeError) {
+        Navigator.of(context).pop();
+      }
+    },
+    builder: (context, state) {
+      return Container(
+        height: 250,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.centerRight,
+            end: Alignment.centerLeft,
+            colors: [Colors.indigoAccent, Colors.cyanAccent],
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: ListView.separated(
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              if (index == cellNames.length) {
+                return Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'groups:',
+                      style: TextStyle(
                         fontSize: 20,
-                        color: Color(0xffb1b1b1),
                       ),
                     ),
-                  ),
-                ),
-              ]);
-        },
-        itemCount: cellNames.length + 2,
-        separatorBuilder: (BuildContext context, int index) => const SizedBox(
-          height: 10,
+                    context.read<GroupsBloc>().state.data.isEmpty
+                        ? const Text(
+                            'No groups available',
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          )
+                        : SizedBox(
+                            width: 150,
+                            child: Column(
+                              children: [
+                                for (int i = 0;
+                                    i <
+                                        context
+                                            .read<GroupsBloc>()
+                                            .state
+                                            .data
+                                            .length;
+                                    i++)
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      SizedBox(
+                                        width: 100,
+                                        child: Text(
+                                          overflow: TextOverflow.ellipsis,
+                                          context
+                                              .read<GroupsBloc>()
+                                              .state
+                                              .data[i]
+                                              .name,
+                                          style: const TextStyle(
+                                            fontSize: 20,
+                                          ),
+                                        ),
+                                      ),
+                                      Checkbox(
+                                          value: chosen.contains(context
+                                              .read<GroupsBloc>()
+                                              .state
+                                              .data[i]
+                                              .id),
+                                          onChanged: (bool? value) {
+                                            if (value!) {
+                                              callBackChangeCheckBoxValue(
+                                                  context
+                                                      .read<GroupsBloc>()
+                                                      .state
+                                                      .data[i]
+                                                      .id,
+                                                  true);
+                                            } else {
+                                              callBackChangeCheckBoxValue(
+                                                  context
+                                                      .read<GroupsBloc>()
+                                                      .state
+                                                      .data[i]
+                                                      .id,
+                                                  false);
+                                            }
+                                          }),
+                                    ],
+                                  ),
+                              ],
+                            ),
+                          ),
+                  ],
+                );
+              }
+              if (index == cellNames.length + 1) {
+                return addToDatabaseButton(
+                    context, controllers, callBackResetPanel, chosen);
+              }
+              return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '${cellNames[index]}:',
+                      style: const TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                      ),
+                      width: 150,
+                      child: TextFormField(
+                        onFieldSubmitted: (value) {
+                          if (index == 4) {
+                            context
+                                .read<PostCodeCubit>()
+                                .getPostCodeData(value);
+                          }
+                        },
+                        controller: controllers[index],
+                        decoration: const InputDecoration.collapsed(
+                          hintText: 'Write here!',
+                          hintStyle: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w400,
+                            fontSize: 20,
+                            color: Color(0xffb1b1b1),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ]);
+            },
+            itemCount: cellNames.length + 2,
+            separatorBuilder: (BuildContext context, int index) =>
+                const SizedBox(
+              height: 10,
+            ),
+          ),
         ),
-      ),
-    ),
+      );
+    },
   );
-  },
-);
 }
 
 addToDatabaseButton(
@@ -384,7 +387,6 @@ addToDatabaseButton(
         }
       }
       if (isEveryCellFilled) {
-
         PeopleModel person = PeopleModel(
             birthDate: controllers[0].text,
             city: controllers[1].text,
@@ -569,20 +571,26 @@ buttonUpdate(BuildContext context, List<TextEditingController> controllers,
     int id, List<int> chosen) {
   return ElevatedButton(
     onPressed: () {
-      PeopleModel person = PeopleModel(
-          birthDate: controllers[0].text,
-          city: controllers[1].text,
-          county: controllers[2].text,
-          name: controllers[3].text,
-          postCode: controllers[4].text,
-          street: controllers[5].text,
-          surname: controllers[6].text,
-          voivodeship: controllers[7].text,
-          groups: chosen,
-          id: context.read<PeopleBloc>().state.data[id].id);
-      context
-          .read<PeopleBloc>()
-          .add(UpdatePersonEvent(person: person, context: context));
+      bool isEverythingFilled = true;
+      for (int i = 0; i < controllers.length; i++) {
+        if (controllers[i].text == '') isEverythingFilled = false;
+      }
+      if (isEverythingFilled) {
+        PeopleModel person = PeopleModel(
+            birthDate: controllers[0].text,
+            city: controllers[1].text,
+            county: controllers[2].text,
+            name: controllers[3].text,
+            postCode: controllers[4].text,
+            street: controllers[5].text,
+            surname: controllers[6].text,
+            voivodeship: controllers[7].text,
+            groups: chosen,
+            id: context.read<PeopleBloc>().state.data[id].id);
+        context
+            .read<PeopleBloc>()
+            .add(UpdatePersonEvent(person: person, context: context));
+      }
     },
     style: ElevatedButton.styleFrom(
       backgroundColor: Colors.lightGreen,

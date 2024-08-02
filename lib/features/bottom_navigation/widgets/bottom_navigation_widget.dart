@@ -32,7 +32,8 @@ class BottomNavigationWidget extends StatelessWidget {
                     label: Text(
                       'Person',
                       style: TextStyle(
-                        color: state.chosenScreen == 0 ? Colors.red : Colors.grey,
+                        color:
+                            state.chosenScreen == 0 ? Colors.red : Colors.grey,
                       ),
                     ),
                   ),
@@ -52,7 +53,8 @@ class BottomNavigationWidget extends StatelessWidget {
                     label: Text(
                       'Groups',
                       style: TextStyle(
-                        color: state.chosenScreen == 1 ? Colors.red : Colors.grey,
+                        color:
+                            state.chosenScreen == 1 ? Colors.red : Colors.grey,
                       ),
                     ),
                   ),

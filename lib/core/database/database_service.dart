@@ -1,20 +1,21 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:people_managment/core/constants/constants.dart' as c;
-class DatabaseService{
+
+class DatabaseService {
   static Database? _database;
-  Future<Database> get database async{
-    if(_database != null){
+  Future<Database> get database async {
+    if (_database != null) {
       return _database!;
     }
-    _database=await _initialize();
+    _database = await _initialize();
     return _database!;
   }
 
-  Future<String> get fullPath async{
-    const name="${c.databaseName}.db";
-    final path=await getDatabasesPath();
-    return join(path,name);
+  Future<String> get fullPath async {
+    const name = "${c.databaseName}.db";
+    final path = await getDatabasesPath();
+    return join(path, name);
   }
 
   Future<Database> _initialize() async {
@@ -46,7 +47,8 @@ class DatabaseService{
       voivodeship TEXT
     )''');
 
-    await database.execute('''CREATE TABLE IF NOT EXISTS ${c.tableNamePeople}_${c.tableNameGroup}(
+    await database.execute(
+        '''CREATE TABLE IF NOT EXISTS ${c.tableNamePeople}_${c.tableNameGroup}(
       FK_${c.tableNamePeople}ID INTEGER,
       FK_${c.tableNameGroup}ID INTEGER,
       FOREIGN KEY (FK_${c.tableNamePeople}ID) REFERENCES ${c.tableNamePeople} (PK_${c.tableNamePeople}ID) ON DELETE CASCADE,
@@ -54,6 +56,4 @@ class DatabaseService{
       PRIMARY KEY (FK_${c.tableNamePeople}ID, FK_${c.tableNameGroup}ID)
     )''');
   }
-
-
 }

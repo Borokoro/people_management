@@ -1,14 +1,14 @@
 part of 'groups_bloc.dart';
 
-class GroupsState extends Equatable{
+class GroupsState extends Equatable {
   final List<GroupsModel> data;
 
   const GroupsState({this.data = const []});
 
   @override
   List<Object> get props => [
-    data,
-  ];
+        data,
+      ];
 }
 
 class GroupsLoading extends GroupsState {

@@ -12,6 +12,5 @@ class GroupsEntity extends Equatable {
   });
 
   @override
-  List<Object> get props =>
-      [name, people, id];
+  List<Object> get props => [name, people, id];
 }

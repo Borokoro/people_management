@@ -6,6 +6,6 @@ class BottomNavigationChosenScreen extends Equatable {
 
   @override
   List<Object> get props => [
-    chosenScreen,
-  ];
+        chosenScreen,
+      ];
 }

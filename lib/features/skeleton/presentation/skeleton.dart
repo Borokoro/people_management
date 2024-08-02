@@ -7,7 +7,7 @@ import 'package:people_managment/features/skeleton/presentation/widgets/skeleton
 import '../../groups/presentation/pages/groups_screen.dart';
 import '../../people/presentation/pages/people_screen.dart';
 
-List<Widget> pages= const[
+List<Widget> pages = const [
   PeopleScreen(),
   GroupsScreen(),
 ];
@@ -17,8 +17,8 @@ class Skeleton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BottomNavigationCubit,BottomNavigationChosenScreen>(
-      builder: (context, state){
+    return BlocBuilder<BottomNavigationCubit, BottomNavigationChosenScreen>(
+      builder: (context, state) {
         return Scaffold(
           appBar: appBarSkeleton(context, state.chosenScreen),
           extendBodyBehindAppBar: true,

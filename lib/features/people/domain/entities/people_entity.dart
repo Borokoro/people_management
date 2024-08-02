@@ -26,6 +26,16 @@ class PeopleEntity extends Equatable {
   });
 
   @override
-  List<Object> get props =>
-      [name, surname, birthDate, postCode, city, street, county, voivodeship, groups, id];
+  List<Object> get props => [
+        name,
+        surname,
+        birthDate,
+        postCode,
+        city,
+        street,
+        county,
+        voivodeship,
+        groups,
+        id
+      ];
 }

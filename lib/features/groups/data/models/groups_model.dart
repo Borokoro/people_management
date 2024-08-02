@@ -1,5 +1,4 @@
 import 'package:people_managment/features/groups/domain/entities/groups_entity.dart';
-import 'package:people_managment/features/people/domain/entities/people_entity.dart';
 import 'package:people_managment/core/constants/constants.dart' as c;
 
 class GroupsModel extends GroupsEntity {
@@ -9,7 +8,8 @@ class GroupsModel extends GroupsEntity {
     required super.id,
   });
 
-  factory GroupsModel.fromDatabase(Map<String, dynamic> json, List<dynamic> people){
+  factory GroupsModel.fromDatabase(
+      Map<String, dynamic> json, List<dynamic> people) {
     return GroupsModel(
       id: json['PK_${c.tableNameGroup}ID'],
       name: json['name'],

@@ -4,12 +4,12 @@ import 'package:people_managment/features/people/domain/repositories/people_repo
 
 import '../../../../core/error/failures.dart';
 
-class UpdatePersonUseCase{
+class UpdatePersonUseCase {
   final PeopleRepository peopleRepository;
 
   const UpdatePersonUseCase({required this.peopleRepository});
 
-  Future<Either<Failure, void>> call(PeopleModel person){
+  Future<Either<Failure, void>> call(PeopleModel person) {
     return peopleRepository.updatePerson(person);
   }
 }

@@ -9,14 +9,13 @@ class PostCodeDataModel extends PostCodeEntity {
     required super.voivodeship,
   });
 
-  factory PostCodeDataModel.fromApi(Map<String, dynamic> json){
+  factory PostCodeDataModel.fromApi(Map<String, dynamic> json) {
     return PostCodeDataModel(
       city: json['miejscowosc'],
       county: json['powiat'],
       postCode: json['kod'],
       street: json['ulica'],
       voivodeship: json['wojewodztwo'],
-
     );
   }
 

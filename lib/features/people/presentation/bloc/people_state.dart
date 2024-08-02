@@ -1,14 +1,14 @@
 part of 'people_bloc.dart';
 
-class PeopleState extends Equatable{
+class PeopleState extends Equatable {
   final List<PeopleModel> data;
 
   const PeopleState({this.data = const []});
 
   @override
   List<Object> get props => [
-    data,
-  ];
+        data,
+      ];
 }
 
 class PeopleLoading extends PeopleState {

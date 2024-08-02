@@ -15,19 +15,20 @@ class PeopleModel extends PeopleEntity {
     required super.id,
   });
 
-  factory PeopleModel.fromDatabase(Map<String, dynamic> json, List<dynamic> groups){
-   return PeopleModel(
-       id: json['PK_${c.tableNamePeople}ID'],
-       birthDate: json['birthDate'],
-       city: json['city'],
-       county: json['county'],
-       name: json['name'],
-       postCode: json['postCode'],
-       street: json['street'],
-       surname: json['surname'],
-       voivodeship: json['voivodeship'],
-       groups: groups,
-   );
+  factory PeopleModel.fromDatabase(
+      Map<String, dynamic> json, List<dynamic> groups) {
+    return PeopleModel(
+      id: json['PK_${c.tableNamePeople}ID'],
+      birthDate: json['birthDate'],
+      city: json['city'],
+      county: json['county'],
+      name: json['name'],
+      postCode: json['postCode'],
+      street: json['street'],
+      surname: json['surname'],
+      voivodeship: json['voivodeship'],
+      groups: groups,
+    );
   }
 
   Map<String, dynamic> toJson() {
